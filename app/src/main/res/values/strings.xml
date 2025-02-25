@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WorkWay</string>
+    <string name="web_client_id">539428534493-iduuj0034i314le4eo3f090s1kuthfcq.apps.googleusercontent.com</string>
+    <string name="sign_in_with_google">Sign In with Google</string>
 </resources>

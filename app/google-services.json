@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "539428534493",
+    "project_id": "workway-fcfd9",
+    "storage_bucket": "workway-fcfd9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539428534493:android:7b9b26f362788fff338334",
+        "android_client_info": {
+          "package_name": "com.zybooks.workway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539428534493-a9a8orheaj0aisa6te4v9917pplk4s4g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zybooks.workway",
+            "certificate_hash": "b6c7d3e2b17caceb052322f6554e3a63346a06ba"
+          }
+        },
+        {
+          "client_id": "539428534493-n71bpcsqtfj4jfktr37h2336eoe23emq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCATR9AioRY0GTzP_yPIv-AuAeWFk9NrYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539428534493-n71bpcsqtfj4jfktr37h2336eoe23emq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
