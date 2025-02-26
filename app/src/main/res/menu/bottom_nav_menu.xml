@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/action_training"
+        android:title="Training"
+        android:icon="@drawable/training"/>
+    <item
+        android:id="@+id/action_meetings"
+        android:title="Meetings"
+        android:icon="@drawable/meetings"/>
+    <item
+        android:id="@+id/action_home"
+        android:title="Home"
+        android:icon="@drawable/home"/>
+    <item
+        android:id="@+id/action_messages"
+        android:title="Messages"
+        android:icon="@drawable/messages"/>
 </menu>
