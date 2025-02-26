@@ -34,6 +34,7 @@ class HomeScreen : AppCompatActivity() {
 
         // Bottom menu and fragment selections
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
+        bottomNavigationView.selectedItemId = R.id.action_home
 
         val trainingFragment = Training()
         val meetingsFragment = Meetings()
