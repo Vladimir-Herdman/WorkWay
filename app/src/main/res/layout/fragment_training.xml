@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Training">
+    tools:context="com.zybooks.workway.HomeScreen">
 
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="This is your training!!!" />
+        android:fillViewport="true">
 
-</FrameLayout>
+        <GridLayout
+            android:id="@+id/light_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:useDefaultMargins="true"
+            android:columnCount="2"
+            android:rowCount="8"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+            <Button style="@style/trainingButton" />
+        </GridLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
