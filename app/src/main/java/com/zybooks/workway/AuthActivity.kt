@@ -30,7 +30,8 @@ class AuthActivity : AppCompatActivity() {
         auth = Firebase.auth
         credentialManager = CredentialManager.create(baseContext)
         if (intent.getBooleanExtra("LOGOUT", false)) signOut()
-        launchCredentialManager()
+        if (auth.currentUser != null) startActivity(Intent(this, HomeScreen::class.java))
+        else launchCredentialManager()
     }
 
     private fun launchCredentialManager() {
