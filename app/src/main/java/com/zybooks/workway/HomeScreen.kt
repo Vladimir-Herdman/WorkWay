@@ -68,6 +68,7 @@ class HomeScreen : AppCompatActivity() {
                 val intent = Intent(this, AuthActivity::class.java)
                 intent.putExtra("LOGOUT", true)
                 startActivity(intent)
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)

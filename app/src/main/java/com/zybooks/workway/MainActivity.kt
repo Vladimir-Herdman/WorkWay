@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val activity = if (FirebaseAuth.getInstance().currentUser != null) HomeScreen::class.java else AuthActivity::class.java;
         startActivity(Intent(this, activity))
+        finish()
     }
 
     fun onSignInClick(view: View){

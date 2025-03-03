@@ -52,6 +52,7 @@ class AuthActivity : AppCompatActivity() {
                 handleSignIn(result.credential)
             } catch (e: GetCredentialException) {
                 Log.e(TAG, "Couldn't retrieve user's credentials: ${e.localizedMessage}")
+                launchCredentialManager()
             }
         }
     }
@@ -74,6 +75,7 @@ class AuthActivity : AppCompatActivity() {
                     val text = "Logged in as " + user?.email
                     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, HomeScreen::class.java))
+                    finish()
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
