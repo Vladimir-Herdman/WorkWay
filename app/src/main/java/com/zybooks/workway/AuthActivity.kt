@@ -57,5 +57,6 @@ class AuthActivity : AppCompatActivity() {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
         googleSignInButton.text = text
         googleSignInButton.isEnabled = false
+        startActivity(Intent(this, HomeScreen::class.java))
     }
 }

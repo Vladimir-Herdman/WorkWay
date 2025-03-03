@@ -20,7 +20,9 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Testing AuthActivity
+        // If signed in go to HomeScreen
+        // WIP
+        // Otherwise go to AuthActivity
         startActivity(Intent(this, AuthActivity::class.java))
     }
 
