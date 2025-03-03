@@ -65,7 +65,7 @@ class HomeScreen : AppCompatActivity() {
         // Determine which menu option was chosen
         return when (item.itemId) {
             R.id.action_logout -> {
-                val intent = Intent(this, AuthActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("LOGOUT", true)
                 startActivity(intent)
                 finish()

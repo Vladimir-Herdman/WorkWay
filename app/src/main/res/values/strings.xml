@@ -5,4 +5,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="back_arrow">&#60;-</string>
     <string name="forward_arrow">-&#62;</string>
+    <string name="workway">WorkWay</string>
 </resources>
