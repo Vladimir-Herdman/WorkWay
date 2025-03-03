@@ -1,5 +1,6 @@
 package com.zybooks.workway
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -64,7 +65,9 @@ class HomeScreen : AppCompatActivity() {
         // Determine which menu option was chosen
         return when (item.itemId) {
             R.id.action_logout -> {
-                Log.i("AppBar", "Logout Button Pressed")
+                val intent = Intent(this, AuthActivity::class.java)
+                intent.putExtra("LOGOUT", true)
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)

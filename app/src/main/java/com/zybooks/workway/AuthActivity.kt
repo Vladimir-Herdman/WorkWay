@@ -49,6 +49,8 @@ class AuthActivity : AppCompatActivity() {
                 login = { onLoginSuccess() }
             )
         }
+
+        if (intent.getBooleanExtra("LOGOUT", false)) onLogout()
     }
 
     private fun onLoginSuccess() {
@@ -58,5 +60,9 @@ class AuthActivity : AppCompatActivity() {
         googleSignInButton.text = text
         googleSignInButton.isEnabled = false
         startActivity(Intent(this, HomeScreen::class.java))
+    }
+
+    private fun onLogout() {
+        return
     }
 }
