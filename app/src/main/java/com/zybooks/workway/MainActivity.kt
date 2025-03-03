@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, loggingIn.toString())
         if (loggingIn) return
         if (auth.currentUser != null) activityResultLauncher.launch(Intent(this, HomeScreen::class.java))
         else launchCredentialManager()
