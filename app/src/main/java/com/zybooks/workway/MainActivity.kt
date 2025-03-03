@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,10 +21,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // If signed in go to HomeScreen
-        // WIP
-        // Otherwise go to AuthActivity
-        startActivity(Intent(this, AuthActivity::class.java))
+        val activity = if (FirebaseAuth.getInstance().currentUser != null) HomeScreen::class.java else AuthActivity::class.java;
+        startActivity(Intent(this, activity))
     }
 
     fun onSignInClick(view: View){
