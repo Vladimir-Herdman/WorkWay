@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -57,11 +58,20 @@ class HomeScreen : AppCompatActivity() {
 
         onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val intent = Intent().apply {
-                    putExtra("LOGOUT", true)
-                }
-                setResult(RESULT_OK, intent)
-                finish()
+                AlertDialog.Builder(this@HomeScreen)
+                    .setTitle("Logout")
+                    .setMessage("Are you sure you want to log out?")
+                    .setPositiveButton("LOGOUT") { dialog, which ->
+                        val intent = Intent().apply {
+                            putExtra("LOGOUT", true)
+                        }
+                        setResult(RESULT_OK, intent)
+                        finish()
+                    }
+                    .setNegativeButton("CANCEL") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .show()
             }
         })
     }
