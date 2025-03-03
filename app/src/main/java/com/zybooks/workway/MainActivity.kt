@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var credentialManager: CredentialManager
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
+    private var loggingIn = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -55,6 +57,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        Log.d(TAG, loggingIn.toString())
+        if (loggingIn) return
         if (auth.currentUser != null) activityResultLauncher.launch(Intent(this, HomeScreen::class.java))
         else launchCredentialManager()
     }
@@ -93,6 +97,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
+        loggingIn = true
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
@@ -102,6 +107,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
                     activityResultLauncher.launch(Intent(this, HomeScreen::class.java))
                 } else {
+                    loggingIn = false
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
             }
