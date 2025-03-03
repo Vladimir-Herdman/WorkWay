@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -53,6 +54,16 @@ class HomeScreen : AppCompatActivity() {
             }
             true
         }
+
+        onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent = Intent().apply {
+                    putExtra("LOGOUT", true)
+                }
+                setResult(RESULT_OK, intent)
+                finish()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -65,10 +76,7 @@ class HomeScreen : AppCompatActivity() {
         // Determine which menu option was chosen
         return when (item.itemId) {
             R.id.action_logout -> {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("LOGOUT", true)
-                startActivity(intent)
-                finish()
+                onBackPressedDispatcher.onBackPressed()
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -27,6 +29,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var credentialManager: CredentialManager
+    private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +43,19 @@ class MainActivity : AppCompatActivity() {
 
         auth = Firebase.auth
         credentialManager = CredentialManager.create(baseContext)
-        if (intent.getBooleanExtra("LOGOUT", false)) signOut()
-        if (auth.currentUser != null) startActivity(Intent(this, HomeScreen::class.java))
+        activityResultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val data = result.data?.getBooleanExtra("LOGOUT", false)
+                if (data == true) logOut()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (auth.currentUser != null) activityResultLauncher.launch(Intent(this, HomeScreen::class.java))
         else launchCredentialManager()
     }
 
@@ -86,15 +100,14 @@ class MainActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     val text = "Logged in as " + user?.email
                     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, HomeScreen::class.java))
-                    finish()
+                    activityResultLauncher.launch(Intent(this, HomeScreen::class.java))
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
             }
     }
 
-    private fun signOut() {
+    private fun logOut() {
         auth.signOut()
         lifecycleScope.launch {
             try {
