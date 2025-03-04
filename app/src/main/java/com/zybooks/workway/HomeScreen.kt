@@ -1,10 +1,13 @@
 package com.zybooks.workway
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -52,6 +55,25 @@ class HomeScreen : AppCompatActivity() {
             }
             true
         }
+
+        onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                AlertDialog.Builder(this@HomeScreen)
+                    .setTitle("Logout")
+                    .setMessage("Are you sure you want to log out?")
+                    .setPositiveButton("LOGOUT") { dialog, which ->
+                        val intent = Intent().apply {
+                            putExtra("LOGOUT", true)
+                        }
+                        setResult(RESULT_OK, intent)
+                        finish()
+                    }
+                    .setNegativeButton("CANCEL") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -64,7 +86,7 @@ class HomeScreen : AppCompatActivity() {
         // Determine which menu option was chosen
         return when (item.itemId) {
             R.id.action_logout -> {
-                Log.i("AppBar", "Logout Button Pressed")
+                onBackPressedDispatcher.onBackPressed()
                 true
             }
             else -> super.onOptionsItemSelected(item)
