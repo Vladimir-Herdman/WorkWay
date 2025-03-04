@@ -6,7 +6,7 @@ class Meeting {
     var meetingID: String? = null
     var title: String? = null
     var description: String? = null
-    var startTime: LocalDateTime? = null
-    var endTime: LocalDateTime? = null
+    var startTime: String? = null
+    var endTime: String? = null
     var organizerID: String? = null
 }

@@ -6,7 +6,9 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.zybooks.workway.database.DBHelper
 import com.zybooks.workway.model.Meeting
-import java.time.LocalDateTime
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MeetingRepository(context: Context) {
     private val dbHelper = DBHelper(context)
@@ -24,10 +26,12 @@ class MeetingRepository(context: Context) {
     }
 
     // Read Meetings
-    @RequiresApi(Build.VERSION_CODES.O)
+
     fun getMeetings(): List<Meeting> {
         val meetingList = mutableListOf<Meeting>()
         val cursor = dbHelper.getData(DBHelper.TABLE_MEETINGS, arrayOf(DBHelper.COLUMN_MEETING_ID, DBHelper.COLUMN_MEETING_TITLE, DBHelper.COLUMN_MEETING_DESCRIPTION, DBHelper.COLUMN_MEETING_ORGANIZER_ID, DBHelper.COLUMN_MEETING_STARTTIME, DBHelper.COLUMN_MEETING_ENDTIME))
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+
 
         while (cursor.moveToNext()) {
             val meeting = Meeting().apply {
@@ -35,8 +39,8 @@ class MeetingRepository(context: Context) {
                 title = cursor.getString(1)
                 description = cursor.getString(2)
                 organizerID = cursor.getString(3)
-                startTime = LocalDateTime.now()  // Replace with proper parsing
-                endTime = LocalDateTime.now()
+                startTime = sdf.format(Date(cursor.getLong(4)))
+                endTime = sdf.format(Date(cursor.getLong(5)))
             }
             meetingList.add(meeting)
         }

@@ -6,7 +6,10 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.zybooks.workway.database.DBHelper
 import com.zybooks.workway.model.CalendarEvent
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.util.Date
+import java.util.Locale
 
 class CalendarRepository(context: Context) {
     private val dbHelper = DBHelper(context)
@@ -24,18 +27,18 @@ class CalendarRepository(context: Context) {
     }
 
     // Read Calendar Events
-    @RequiresApi(Build.VERSION_CODES.O)
     fun getCalendarEvents(): List<CalendarEvent> {
         val eventList = mutableListOf<CalendarEvent>()
         val cursor = dbHelper.getData(DBHelper.TABLE_CALENDAR_EVENTS, arrayOf(DBHelper.COLUMN_EVENT_ID, DBHelper.COLUMN_EVENT_USER_ID, DBHelper.COLUMN_EVENT_TITLE, DBHelper.COLUMN_EVENT_STARTDATE, DBHelper.COLUMN_EVENT_ENDDATE, DBHelper.COLUMN_EVENT_DESCRIPTION))
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
 
         while (cursor.moveToNext()) {
             val event = CalendarEvent().apply {
                 eventID = cursor.getString(0)
                 organizerID = cursor.getString(1)
                 title = cursor.getString(2)
-                startTime = LocalDateTime.now()
-                endTime = LocalDateTime.now()
+                startTime = sdf.format(Date(cursor.getLong(3)))
+                endTime =  sdf.format(Date(cursor.getLong(4)))
                 description = cursor.getString(5)
             }
             eventList.add(event)

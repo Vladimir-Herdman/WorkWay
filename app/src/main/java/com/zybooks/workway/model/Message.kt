@@ -1,11 +1,9 @@
 package com.zybooks.workway.model
 
-import java.time.LocalDateTime
-
 class Message {
-    var messageID: String? = null
-    var senderID: String? = null
-    var recipientID: String? = null
-    var content: String? = null
-    var timestamp: LocalDateTime? = null
+    var messageID: Int? = null
+    var chatID: Int? = null
+    var senderID: Int? = null
+    var messageText: String? = null
+    var timestamp: String? = null
 }
