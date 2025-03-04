@@ -63,6 +63,9 @@ class MainActivity : AppCompatActivity() {
         dbHelper.insertDummyData()
         dbHelper.insertDummyCompanies(this)
 
+        val status = companyRepo.authenticateUser("newuser@onu.edu", "ONU123")
+        Log.d("DB_TEST_COMP", "Authentication Status: $status")
+
         // Fetch and print all users
         val users = userRepo.getAllUsers()
         for (user in users) {
@@ -80,9 +83,6 @@ class MainActivity : AppCompatActivity() {
         for (calendar in calendars) {
             Log.d("DB_TEST", "CalendarID: ${calendar.eventID}, Title: ${calendar.title}, Description: ${calendar.description}")
         }
-
-        val status = companyRepo.authenticateUser("alice@onu.edu", "password123", "ONU123")
-        Log.d("DB_TEST_COMP", "Authentication Status: $status")
 
         val messages = chatRepo.getMessages(chatId = 1)
 

@@ -32,7 +32,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val COLUMN_USER_ID = "id"
         const val COLUMN_USER_NAME = "name"
         const val COLUMN_USER_EMAIL = "email"
-        const val COLUMN_USER_PASSWORD = "password"
+//        const val COLUMN_USER_PASSWORD = "password"
         const val COLUMN_USER_BUSINESS_CODE = "business_code"
 
         // Messages Table
@@ -87,10 +87,11 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                 $COLUMN_USER_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 $COLUMN_USER_NAME TEXT NOT NULL,
                 $COLUMN_USER_EMAIL TEXT UNIQUE NOT NULL,
-                $COLUMN_USER_PASSWORD TEXT NOT NULL,
                 $COLUMN_USER_BUSINESS_CODE TEXT UNIQUE NOT NULL
             )
         """
+        //removed password for the create query
+        //                $COLUMN_USER_PASSWORD TEXT NOT NULL,
 
         private const val CREATE_MESSAGES_TABLE = """
             CREATE TABLE $TABLE_MESSAGES (
@@ -159,13 +160,13 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         val user1 = ContentValues().apply {
             put(COLUMN_USER_NAME, "Alice")
             put(COLUMN_USER_EMAIL, "alice@onu.edu")
-            put(COLUMN_USER_PASSWORD, "password123")
+//            put(COLUMN_USER_PASSWORD, "password123")
             put(COLUMN_USER_BUSINESS_CODE, "ONU123")
         }
         val user2 = ContentValues().apply {
             put(COLUMN_USER_NAME, "Bob")
             put(COLUMN_USER_EMAIL, "bob@onu.edu")
-            put(COLUMN_USER_PASSWORD, "password456")
+//            put(COLUMN_USER_PASSWORD, "password456")
             put(COLUMN_USER_BUSINESS_CODE, "ONU123")
         }
         db.insert(TABLE_USERS, null, user1)
