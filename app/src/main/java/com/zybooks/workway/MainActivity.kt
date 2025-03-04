@@ -24,6 +24,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
+import com.zybooks.workway.model.User
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -101,15 +102,29 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    val text = "Logged in as " + user?.email
-                    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-                    activityResultLauncher.launch(Intent(this, HomeScreen::class.java))
+                    logIn()
                 } else {
                     loggingIn = false
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
             }
+    }
+
+    private fun logIn() {
+        val user: User
+        if (false /*getUser(auth.currentUser?.uid) != null*/) { // User exists
+            // Load user attributes from database
+            user = User()
+        } else { // User is new
+            user = User().apply {
+                userID = auth.currentUser?.uid
+                name = auth.currentUser?.displayName
+                email = auth.currentUser?.email
+            }
+        }
+        val text = "Logged in as ${user.email}"
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+        activityResultLauncher.launch(Intent(this, HomeScreen::class.java))
     }
 
     private fun logOut() {
