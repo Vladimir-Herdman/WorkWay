@@ -4,6 +4,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="darkblue_transparent">#DD0066b6</color>
+    <color name="darkdarkblue_transparent">#DD034A84</color>
+    <color name="lightblue_transparent">#DD0678D2</color>
     <color name="blue_500">#FF0077b6</color>
     <color name="blue_200">#FF00b4d8</color>
 
