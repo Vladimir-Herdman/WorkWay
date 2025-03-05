@@ -3,13 +3,16 @@ package com.zybooks.workway
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity.RESULT_OK
 import androidx.credentials.ClearCredentialStateRequest
+import androidx.credentials.Credential
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.ClearCredentialException
 import androidx.credentials.exceptions.GetCredentialException
+import androidx.credentials.exceptions.NoCredentialException
 import androidx.lifecycle.lifecycleScope
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -20,21 +23,28 @@ import com.google.firebase.auth.auth
 import com.zybooks.workway.model.User
 import kotlinx.coroutines.launch
 
-class AuthManager(
-        private val activity: MainActivity,
-        private val activityResultLauncher: ActivityResultLauncher<Intent>
-    ) {
-
+class AuthManager(private val activity: MainActivity) {
+    private var loggingIn = false
     private val auth = Firebase.auth
     private val credentialManager = CredentialManager.create(activity.applicationContext)
-
-    var loggingIn = false
-
-    fun isLoggedIn(): Boolean {
-        return auth.currentUser != null
+    private val activityResultLauncher = activity.registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val data = result.data?.getBooleanExtra("LOGOUT", false)
+            if (data == true) this.logOut()
+        }
     }
 
-    fun launchCredentialManager() {
+    fun run() {
+        // MIGRATE TO USERNAME/PASSWORD
+        return activityResultLauncher.launch(Intent(activity, HomeScreen::class.java))
+        if (loggingIn) return
+        if (auth.currentUser != null) return logIn()
+        launchCredentialManager()
+    }
+
+    private fun launchCredentialManager() {
         val googleIdOption = GetGoogleIdOption.Builder()
             .setServerClientId(activity.applicationContext.getString(R.string.web_client_id))
             .setFilterByAuthorizedAccounts(false)
@@ -48,14 +58,15 @@ class AuthManager(
             try {
                 val result = credentialManager.getCredential(activity, request)
                 handleSignIn(result.credential)
+            } catch (e: NoCredentialException) {
+                Log.e(TAG, "Couldn't find credentials: ${e.localizedMessage}")
             } catch (e: GetCredentialException) {
                 Log.e(TAG, "Couldn't retrieve user's credentials: ${e.localizedMessage}")
-                launchCredentialManager()
             }
         }
     }
 
-    private fun handleSignIn(credential: androidx.credentials.Credential) {
+    private fun handleSignIn(credential: Credential) {
         if (credential is CustomCredential && credential.type == TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
             val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
             firebaseAuthWithGoogle(googleIdTokenCredential.idToken)
@@ -96,7 +107,7 @@ class AuthManager(
         loggingIn = false
     }
 
-    fun logOut() {
+    private fun logOut() {
         auth.signOut()
         activity.lifecycleScope.launch {
             try {

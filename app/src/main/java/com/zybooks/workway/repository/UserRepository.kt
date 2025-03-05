@@ -13,7 +13,7 @@ class UserRepository(context: Context) {
         val values = ContentValues().apply {
             put(DBHelper.COLUMN_USER_NAME, user.name)
             put(DBHelper.COLUMN_USER_EMAIL, user.email)
-            put(DBHelper.COLUMN_USER_PASSWORD, user.password)
+//            put(DBHelper.COLUMN_USER_PASSWORD, user.password)
         }
         return dbHelper.insertData(DBHelper.TABLE_USERS, values)
     }
@@ -21,14 +21,14 @@ class UserRepository(context: Context) {
     // Read Users
     fun getAllUsers(): List<User> {
         val userList = mutableListOf<User>()
-        val cursor = dbHelper.getData(DBHelper.TABLE_USERS, arrayOf(DBHelper.COLUMN_USER_ID, DBHelper.COLUMN_USER_NAME, DBHelper.COLUMN_USER_EMAIL, DBHelper.COLUMN_USER_PASSWORD))
+        val cursor = dbHelper.getData(DBHelper.TABLE_USERS, arrayOf(DBHelper.COLUMN_USER_ID, DBHelper.COLUMN_USER_NAME, DBHelper.COLUMN_USER_EMAIL))
 
         while (cursor.moveToNext()) {
             val user = User().apply {
                 userID = cursor.getString(0)
                 name = cursor.getString(1)
                 email = cursor.getString(2)
-                password = cursor.getString(3)
+//                password = cursor.getString(3)
             }
             userList.add(user)
         }
@@ -41,7 +41,7 @@ class UserRepository(context: Context) {
         val values = ContentValues().apply {
             put(DBHelper.COLUMN_USER_NAME, name)
             put(DBHelper.COLUMN_USER_EMAIL, email)
-            put(DBHelper.COLUMN_USER_PASSWORD, password)
+//            put(DBHelper.COLUMN_USER_PASSWORD, password)
         }
         return dbHelper.updateData(DBHelper.TABLE_USERS, values, "${DBHelper.COLUMN_USER_ID}=?", arrayOf(userID))
     }

@@ -1,11 +1,9 @@
 package com.zybooks.workway
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -18,7 +16,6 @@ import com.zybooks.workway.repository.UserRepository
 
 class MainActivity : AppCompatActivity() {
     private lateinit var authManager: AuthManager
-    private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,25 +27,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        activityResultLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val data = result.data?.getBooleanExtra("LOGOUT", false)
-                if (data == true) authManager.logOut()
-            }
-        }
-        authManager = AuthManager(this, activityResultLauncher)
+        authManager = AuthManager(this)
 
         testDatabaseFunctions()
     }
 
     override fun onResume() {
         super.onResume()
-        if (authManager.loggingIn) return
-        if (authManager.isLoggedIn())
-            activityResultLauncher.launch(Intent(this, HomeScreen::class.java))
-        else authManager.launchCredentialManager()
+        // authManager.run()
     }
 
     private fun testDatabaseFunctions() {
@@ -62,6 +48,9 @@ class MainActivity : AppCompatActivity() {
         // Insert dummy data
         dbHelper.insertDummyData()
         dbHelper.insertDummyCompanies(this)
+
+        val status = companyRepo.authenticateUser("newuser@onu.edu", "ONU123")
+        Log.d("DB_TEST_COMP", "Authentication Status: $status")
 
         // Fetch and print all users
         val users = userRepo.getAllUsers()
@@ -81,14 +70,15 @@ class MainActivity : AppCompatActivity() {
             Log.d("DB_TEST", "CalendarID: ${calendar.eventID}, Title: ${calendar.title}, Description: ${calendar.description}")
         }
 
-        val status = companyRepo.authenticateUser("alice@onu.edu", "password123", "ONU123")
-        Log.d("DB_TEST_COMP", "Authentication Status: $status")
-
         val messages = chatRepo.getMessages(chatId = 1)
 
         for (msg in messages) {
             Log.d("DB_TEST_MESSAGES","${msg.senderID}: ${msg.messageText} [${msg.timestamp}]")
         }
 
+    }
+
+    fun onSignInClick(view: View){
+        authManager.run()
     }
 }

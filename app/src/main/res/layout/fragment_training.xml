@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#1D97DD"
     android:layout_height="match_parent"
     tools:context="com.zybooks.workway.HomeScreen">
 
@@ -11,6 +12,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/gradient_blue"
         android:fillViewport="true">
 
         <GridLayout
@@ -28,22 +30,70 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" >
 
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
-            <Button style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t1"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t2"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t3"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t4"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t5"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t6"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t7"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t8"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t9"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t10"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t1"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t2"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t3"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t4"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t5"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
+            <ImageButton
+                android:src="@drawable/t6"
+                android:backgroundTint="@color/white"
+                style="@style/trainingButton" />
         </GridLayout>
 
     </ScrollView>
