@@ -5,9 +5,11 @@ import android.content.Context
 import android.database.Cursor
 import com.zybooks.workway.database.DBHelper
 import com.zybooks.workway.model.Company
+import com.zybooks.workway.model.User
 
 class CompanyRepository(context: Context) {
     private val dbHelper = DBHelper(context)
+    private val userRepository = UserRepository(context)
 
     fun insertCompany(company: Company): Long {
         val db = dbHelper.writableDatabase
@@ -56,7 +58,7 @@ class CompanyRepository(context: Context) {
         }
     }
 
-    fun authenticateUser(email: String, password: String, businessCode: String): String {
+    fun authenticateUser(email: String, businessCode: String): String {
         val domain = email.substringAfter("@") // Extract domain from email
 
         // Check if company exists
@@ -74,17 +76,23 @@ class CompanyRepository(context: Context) {
         val userCursor = dbHelper.getData(
             "users",
             arrayOf("email"),
-            "email = ? AND password = ? AND business_code = ?",
-            arrayOf(email, password, businessCode)
+            "email = ? AND business_code = ?",
+            arrayOf(email, businessCode)
         )
 
-        val isAuthenticated = userCursor.moveToFirst() // Moves cursor to first row if data exists
+        val userExists = userCursor.moveToFirst()
         userCursor.close()
 
-        return if (isAuthenticated) {
+        return if (userExists) {
             "Authentication successful."
         } else {
-            "Invalid email or password."
+            //create a new user
+            val newUser = User().apply {
+                name = "New User"
+                this.email = email
+            }
+            userRepository.insertUser(newUser)
+            return "New user created"
         }
     }
 }
