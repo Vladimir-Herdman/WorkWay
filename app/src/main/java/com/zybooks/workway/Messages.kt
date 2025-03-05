@@ -73,14 +73,14 @@ fun dpToPx(dp: Int, context: Context): Int {
 
                     outlineProvider = ViewOutlineProvider.BACKGROUND
                     clipToOutline = true
-                    setBackgroundColor(ContextCompat.getColor(context, R.color.darkblue_transparent))
+                    setBackgroundColor(ContextCompat.getColor(context, R.color.lightblue_transparent))
 
                     val radius = dpToPx(16, context).toFloat()
                     val border = GradientDrawable().apply {
                         shape = GradientDrawable.RECTANGLE
                         cornerRadius = radius  // Set corner radius
-                        setStroke(dpToPx(2, context), ContextCompat.getColor(context, R.color.black))  // Set border width and color
-                        setColor(ContextCompat.getColor(context, R.color.darkblue_transparent))  // Set background color
+                        setStroke(dpToPx(3, context), ContextCompat.getColor(context, R.color.darkdarkblue_transparent))  // Set border width and color
+                        setColor(ContextCompat.getColor(context, R.color.lightblue_transparent))  // Set background color
                     }
                     background = border
                     outlineProvider = object : ViewOutlineProvider() {
