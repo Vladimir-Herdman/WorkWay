@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.credentials.ClearCredentialStateRequest
+import androidx.credentials.Credential
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
@@ -50,12 +51,11 @@ class AuthManager(
                 handleSignIn(result.credential)
             } catch (e: GetCredentialException) {
                 Log.e(TAG, "Couldn't retrieve user's credentials: ${e.localizedMessage}")
-                launchCredentialManager()
             }
         }
     }
 
-    private fun handleSignIn(credential: androidx.credentials.Credential) {
+    private fun handleSignIn(credential: Credential) {
         if (credential is CustomCredential && credential.type == TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
             val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
             firebaseAuthWithGoogle(googleIdTokenCredential.idToken)
