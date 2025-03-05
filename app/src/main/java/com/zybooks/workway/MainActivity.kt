@@ -1,6 +1,5 @@
 package com.zybooks.workway
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        authManager.run()
+        // authManager.run()
     }
 
     private fun testDatabaseFunctions() {
@@ -80,9 +79,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onSignInClick(view: View){
-        val intent = Intent(this, HomeScreen::class.java)
-        startActivity(intent)
-        this.finish()
-        Log.i("Login", "Destroyed login page activity")
+        authManager.run()
     }
 }

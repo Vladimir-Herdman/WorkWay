@@ -12,6 +12,7 @@ import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.ClearCredentialException
 import androidx.credentials.exceptions.GetCredentialException
+import androidx.credentials.exceptions.NoCredentialException
 import androidx.lifecycle.lifecycleScope
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -36,6 +37,8 @@ class AuthManager(private val activity: MainActivity) {
     }
 
     fun run() {
+        // MIGRATE TO USERNAME/PASSWORD
+        return activityResultLauncher.launch(Intent(activity, HomeScreen::class.java))
         if (loggingIn) return
         if (auth.currentUser != null) return logIn()
         launchCredentialManager()
@@ -55,6 +58,8 @@ class AuthManager(private val activity: MainActivity) {
             try {
                 val result = credentialManager.getCredential(activity, request)
                 handleSignIn(result.credential)
+            } catch (e: NoCredentialException) {
+                Log.e(TAG, "Couldn't find credentials: ${e.localizedMessage}")
             } catch (e: GetCredentialException) {
                 Log.e(TAG, "Couldn't retrieve user's credentials: ${e.localizedMessage}")
             }
