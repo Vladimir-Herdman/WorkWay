@@ -3,6 +3,7 @@ package com.zybooks.workway
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
@@ -126,5 +127,12 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "GoogleActivity"
+    }
+
+    fun onSignInClick(view: View){
+        val intent = Intent(this, HomeScreen::class.java)
+        startActivity(intent)
+        this.finish()
+        Log.i("Login", "Destroyed login page activity")
     }
 }

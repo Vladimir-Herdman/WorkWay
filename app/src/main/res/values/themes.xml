@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.WorkWay" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">#DD4A9DDF</item>
+        <item name="colorPrimaryVariant">@color/darkblue_transparent</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <item name="colorSecondary">@color/teal_200</item>
@@ -14,12 +14,62 @@
 
     <style name="trainingButton">
         <item name="android:layout_height">150dp</item>
+        <item name="android:scaleType">fitCenter</item>
         <item name="android:layout_width">150dp</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:background">@drawable/square</item>
+        <item name="android:backgroundTint">#DD0C8CEF</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="messagesBox">
+        <item name="android:width">350dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/purple_700</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="messagesBoxLeft">
+        <item name="android:width">350dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/darkblue_transparent</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="messagesBoxRight">
+        <item name="android:width">350dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/darkblue_transparent</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="messagesImage">
+        <item name="android:width">70dp</item>
+        <item name="android:height">70dp</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:background">@drawable/circle</item>
+        <item name="android:clipToOutline">true</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+    
+    <style name="messagesTitle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="messagesText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="messagesDescription">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="Theme.WorkWay" parent="Base.Theme.WorkWay" />

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#1D97DD"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/inputContainer"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/linearRoot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:orientation="vertical">
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/inputContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="8dp" >
+
+    <EditText
+        android:id="@+id/messagesInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/sendButton"
+        android:layout_alignParentLeft="true"
+        android:hint="Enter your message"
+        android:minLines="1"
+        android:maxLines="5"
+        android:ellipsize="end"
+        android:scrollHorizontally="false"
+        android:overScrollMode="never"
+        android:gravity="top|start"
+        android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
+        android:background="@android:drawable/edit_text" />
+
+    <ImageButton
+        android:id="@+id/sendButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/sendmessage"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Send Message" />
+    </RelativeLayout>
+
+</RelativeLayout>
