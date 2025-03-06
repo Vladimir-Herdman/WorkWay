@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/back_arrow"
-                android:textColor="@color/blue_500"
+                android:textColor="@color/white"
                 android:background="@android:color/transparent"
                 android:textStyle="bold"
                 android:onClick="previousMonthAction"
@@ -35,18 +35,18 @@
                 android:id="@+id/monthYearTV"
                 android:layout_width="0dp"
                 android:layout_weight="2"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
-                android:text="Feb 2025"
+                android:text="Mar 2025"
                 android:textSize="20sp"
-                android:textAlignment="center"
-                android:textColor="@color/black"/>
+                android:textAlignment="center" />
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/forward_arrow"
-                android:textColor="@color/blue_500"
+                android:textColor="@color/white"
                 android:background="@android:color/transparent"
                 android:textStyle="bold"
                 android:onClick="nextMonthAction"
@@ -54,6 +54,7 @@
 
         </LinearLayout>
 
+        <!-- Days of the Week Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="SUN"
-                android:textColor="@color/gray"
+                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:textSize="16sp"/>
 
@@ -73,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="MON"
-                android:textColor="@color/gray"
+                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:textSize="16sp"/>
 
@@ -82,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TUE"
-                android:textColor="@color/gray"
+                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:textSize="16sp"/>
 
@@ -91,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="WED"
-                android:textColor="@color/gray"
+                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:textSize="16sp"/>
 
@@ -100,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="THUR"
-                android:textColor="@color/gray"
+                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:textSize="16sp"/>
 
@@ -109,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="FRI"
-                android:textColor="@color/gray"
+                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:textSize="16sp"/>
 
@@ -118,18 +119,20 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="SAT"
-                android:textColor="@color/gray"
+                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:textSize="16sp"/>
 
-
         </LinearLayout>
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/calendarRecyclerView"
+        <GridLayout
+            android:id="@+id/dayscontainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:columnCount="7"
+            android:orientation="horizontal">
+        </GridLayout>
 
     </LinearLayout>
 
