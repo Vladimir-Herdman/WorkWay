@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         }
         authManager = AuthManager(this, activityResultLauncher)
 
-        testDatabaseFunctions()
+//        testDatabaseFunctions()
     }
 
     override fun onResume() {

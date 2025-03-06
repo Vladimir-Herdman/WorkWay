@@ -21,7 +21,7 @@ class UserRepository(context: Context) {
     // Read Users
     fun getAllUsers(): List<User> {
         val userList = mutableListOf<User>()
-        val cursor = dbHelper.getData(DBHelper.TABLE_USERS, arrayOf(DBHelper.COLUMN_USER_ID, DBHelper.COLUMN_USER_NAME, DBHelper.COLUMN_USER_EMAIL))
+        val cursor = dbHelper.getData(DBHelper.TABLE_USERS, arrayOf(DBHelper.COLUMN_USER_ID, DBHelper.COLUMN_USER_NAME, DBHelper.COLUMN_USER_EMAIL, DBHelper.COLUMN_USER_PFP))
 
         while (cursor.moveToNext()) {
             val user = User().apply {
@@ -34,6 +34,27 @@ class UserRepository(context: Context) {
         }
         cursor.close()
         return userList
+    }
+
+    //get a single user
+    fun getUser(usrID: Int?): User {
+        val userList = mutableListOf<User>()
+        val cursor = dbHelper.getData(
+            DBHelper.TABLE_USERS,
+            arrayOf(DBHelper.COLUMN_USER_ID, DBHelper.COLUMN_USER_NAME, DBHelper.COLUMN_USER_EMAIL, DBHelper.COLUMN_USER_PFP),
+            "id = ?",
+            arrayOf(usrID.toString())
+        )
+
+        cursor.moveToFirst()
+        val user = User().apply {
+            userID = cursor.getString(0)
+            name = cursor.getString(1)
+            email = cursor.getString(2)
+        }
+        cursor.close()
+
+        return user
     }
 
     // Update User

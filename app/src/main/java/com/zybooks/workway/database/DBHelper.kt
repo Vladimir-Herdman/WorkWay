@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.zybooks.workway.R
 import com.zybooks.workway.model.Company
 import com.zybooks.workway.repository.CompanyRepository
 
@@ -32,8 +33,9 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val COLUMN_USER_ID = "id"
         const val COLUMN_USER_NAME = "name"
         const val COLUMN_USER_EMAIL = "email"
+        const val COLUMN_USER_PFP = "pfp"
 //        const val COLUMN_USER_PASSWORD = "password"
-        const val COLUMN_USER_BUSINESS_CODE = "business_code"
+//        const val COLUMN_USER_BUSINESS_CODE = "business_code"
 
         // Messages Table
         const val TABLE_MESSAGES = "messages"
@@ -78,6 +80,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val COLUMN_USER1_ID = "user1_id"
         const val COLUMN_USER2_ID = "user2_id"
         const val COLUMN_CHAT_CREATED_AT = "created_at"
+        const val COLUMN_CHAT_LAST_MESSAGE = "last_message"
 
 
 
@@ -87,7 +90,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                 $COLUMN_USER_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 $COLUMN_USER_NAME TEXT NOT NULL,
                 $COLUMN_USER_EMAIL TEXT UNIQUE NOT NULL,
-                $COLUMN_USER_BUSINESS_CODE TEXT UNIQUE NOT NULL
+                $COLUMN_USER_PFP INTEGER UNIQUE NOT NULL
             )
         """
         //removed password for the create query
@@ -146,6 +149,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         $COLUMN_USER1_ID INTEGER NOT NULL,
         $COLUMN_USER2_ID INTEGER NOT NULL,
         $COLUMN_CHAT_CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
+        $COLUMN_CHAT_LAST_MESSAGE TEXT,
         FOREIGN KEY ($COLUMN_USER1_ID) REFERENCES $TABLE_USERS($COLUMN_USER_ID),
         FOREIGN KEY ($COLUMN_USER2_ID) REFERENCES $TABLE_USERS($COLUMN_USER_ID)
     )
@@ -161,13 +165,13 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             put(COLUMN_USER_NAME, "Alice")
             put(COLUMN_USER_EMAIL, "alice@onu.edu")
 //            put(COLUMN_USER_PASSWORD, "password123")
-            put(COLUMN_USER_BUSINESS_CODE, "ONU123")
+            put(COLUMN_USER_PFP, R.drawable.johnface)
         }
         val user2 = ContentValues().apply {
             put(COLUMN_USER_NAME, "Bob")
             put(COLUMN_USER_EMAIL, "bob@onu.edu")
 //            put(COLUMN_USER_PASSWORD, "password456")
-            put(COLUMN_USER_BUSINESS_CODE, "ONU123")
+            put(COLUMN_USER_PFP, R.drawable.johnface)
         }
         db.insert(TABLE_USERS, null, user1)
         db.insert(TABLE_USERS, null, user2)
@@ -318,7 +322,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         columns: Array<String>,
         selection: String? = null,
         selectionArgs: Array<String>? = null,
-        orderBy: String? = null // Optional ORDER BY clause
+        orderBy: String? = null
     ): Cursor {
         val db = this.readableDatabase
         return db.query(tableName, columns, selection, selectionArgs, null, null, orderBy)
