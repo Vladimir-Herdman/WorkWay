@@ -39,8 +39,12 @@ class AuthManager(private val activity: MainActivity) {
 
     fun run() {
         if (loggingIn) return
-        if (auth.currentUser != null) return logIn()
+        if (loggedIn()) return logIn()
         launchCredentialManager()
+    }
+
+    fun loggedIn(): Boolean {
+        return auth.currentUser != null
     }
 
     private fun launchCredentialManager() {
