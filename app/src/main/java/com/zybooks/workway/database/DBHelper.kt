@@ -173,6 +173,14 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 //            put(COLUMN_USER_PASSWORD, "password456")
             put(COLUMN_USER_PFP, R.drawable.johnface)
         }
+
+        val user3 = ContentValues().apply {
+            put(COLUMN_USER_NAME, "John")
+            put(COLUMN_USER_EMAIL, "john@osu.edu")
+//            put(COLUMN_USER_PASSWORD, "password456")
+            put(COLUMN_USER_PFP, R.drawable.johnface)
+        }
+
         db.insert(TABLE_USERS, null, user1)
         db.insert(TABLE_USERS, null, user2)
 
@@ -242,8 +250,8 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             put(COLUMN_USER2_ID, 2)
         }
         val chat2 = ContentValues().apply {
-            put(COLUMN_USER1_ID, 2)
-            put(COLUMN_USER2_ID, 1)
+            put(COLUMN_USER1_ID, 1)
+            put(COLUMN_USER2_ID, 3)
         }
         val chat1Id = db.insert(TABLE_CHATS, null, chat1)
         val chat2Id = db.insert(TABLE_CHATS, null, chat2)
@@ -253,23 +261,34 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             val message = ContentValues().apply {
                 put(COLUMN_CHAT_ID_KEY, chat1Id)
                 put(COLUMN_SENDER_ID, if (i % 2 == 0) 1 else 2)
-                put(COLUMN_MESSAGE_CONTENT, "Message $i in Chat 1")
+                put(COLUMN_MESSAGE_CONTENT, "This is message $i in Chat 1")
                 put(COLUMN_MESSAGE_TIMESTAMP, System.currentTimeMillis())
             }
             db.insert(TABLE_MESSAGES, null, message)
         }
+
+        val updateChat = ContentValues().apply {
+            put(COLUMN_CHAT_LAST_MESSAGE, "This is message 5 in Chat 1")  // Store latest message
+        }
+        db.update(TABLE_CHATS, updateChat, "$COLUMN_CHAT_ID = ?", arrayOf(chat1Id.toString()))
+
+
 
         // Dummy Messages for Chat 2 (6 messages)
         for (i in 1..6) {
             val message = ContentValues().apply {
                 put(COLUMN_CHAT_ID_KEY, chat2Id)
                 put(COLUMN_SENDER_ID, if (i % 2 == 0) 2 else 1)
-                put(COLUMN_MESSAGE_CONTENT, "Message $i in Chat 2")
+                put(COLUMN_MESSAGE_CONTENT, "This is message $i in Chat 2")
                 put(COLUMN_MESSAGE_TIMESTAMP, System.currentTimeMillis())
             }
             db.insert(TABLE_MESSAGES, null, message)
         }
 
+        val updateChat2 = ContentValues().apply {
+            put(COLUMN_CHAT_LAST_MESSAGE, "This is message 5 in Chat 2")  // Store latest message
+        }
+        db.update(TABLE_CHATS, updateChat2, "$COLUMN_CHAT_ID = ?", arrayOf(chat2Id.toString()))
         db.close()
     }
 
