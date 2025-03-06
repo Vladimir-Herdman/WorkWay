@@ -32,67 +32,67 @@
 
             <ImageButton
                 android:src="@drawable/t1"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t2"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t3"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t4"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t5"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t6"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t7"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t8"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t9"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t10"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t1"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t2"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t3"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t4"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t5"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
             <ImageButton
                 android:src="@drawable/t6"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/darkdarkblue_transparent"
                 style="@style/trainingButton" />
         </GridLayout>
 

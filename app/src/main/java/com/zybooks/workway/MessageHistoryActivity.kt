@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import kotlinx.coroutines.delay
 
 data class Message(val text: String)
 
@@ -58,6 +60,7 @@ class MessageHistoryActivity : AppCompatActivity() {
         }
 
         val messagesContainer = findViewById<LinearLayout>(R.id.linearRoot)
+        val scroll = findViewById<ScrollView>(R.id.messagesScroll)
 
         val userName = intent.getStringExtra("USER_NAME")
         val messages = getMessageHistory(userName)
@@ -156,6 +159,10 @@ class MessageHistoryActivity : AppCompatActivity() {
 
             newMessageBox.addView(messageText)
             messagesContainer.addView(newMessageBox)
+
+            scroll.post {
+                scroll.fullScroll(View.FOCUS_DOWN)
+            }
         }
     }
 }
