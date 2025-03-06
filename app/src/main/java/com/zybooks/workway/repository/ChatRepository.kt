@@ -6,11 +6,13 @@ import android.database.Cursor
 import com.zybooks.workway.database.DBHelper
 import com.zybooks.workway.model.Chat
 import com.zybooks.workway.model.Message
+import com.zybooks.workway.model.User
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class ChatRepository(context: Context) {
     private val dbHelper = DBHelper(context)
+    val userRepo = UserRepository(context)
 
     fun createChat(user1Id: Int, user2Id: Int): Long {
         val db = dbHelper.writableDatabase
@@ -57,5 +59,31 @@ class ChatRepository(context: Context) {
         }
         cursor.close()
         return messages
+    }
+
+    fun getAllChats(): Pair<List<Chat>, List<User>> {
+
+        val chats = mutableListOf<Chat>()
+        val users = mutableListOf<User>()
+        val cursor: Cursor = dbHelper.getData(
+            DBHelper.TABLE_CHATS,
+            arrayOf(DBHelper.COLUMN_CHAT_ID, DBHelper.COLUMN_USER1_ID, DBHelper.COLUMN_USER2_ID
+                , DBHelper.COLUMN_CHAT_CREATED_AT, DBHelper.COLUMN_CHAT_LAST_MESSAGE),
+            orderBy = "created_at DESC"
+        )
+        while (cursor.moveToNext()) {
+            val chat = Chat().apply {
+                chatID = cursor.getInt(0)
+                senderUser1ID = cursor.getInt(1)
+                receiverUser2ID = cursor.getInt(2)
+                createdAt = cursor.getString(3)
+                lastMessage = cursor.getString(4)
+            }
+            users.add(userRepo.getUser(chat.senderUser1ID))
+            chats.add(chat)
+        }
+
+        cursor.close()
+        return Pair(chats, users)
     }
 }

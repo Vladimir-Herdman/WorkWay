@@ -29,12 +29,12 @@ class MainActivity : AppCompatActivity() {
 
         authManager = AuthManager(this)
 
-        testDatabaseFunctions()
+//        testDatabaseFunctions()
     }
 
     override fun onResume() {
         super.onResume()
-        // authManager.run()
+        if (authManager.loggedIn()) authManager.run()
     }
 
     private fun testDatabaseFunctions() {

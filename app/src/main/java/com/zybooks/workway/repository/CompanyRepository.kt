@@ -76,8 +76,8 @@ class CompanyRepository(context: Context) {
         val userCursor = dbHelper.getData(
             "users",
             arrayOf("email"),
-            "email = ? AND business_code = ?",
-            arrayOf(email, businessCode)
+            "email = ?",
+            arrayOf(email)
         )
 
         val userExists = userCursor.moveToFirst()
