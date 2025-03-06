@@ -1,6 +1,7 @@
 package com.zybooks.workway
 
 import android.content.Intent
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,8 +38,6 @@ class AuthManager(private val activity: MainActivity) {
     }
 
     fun run() {
-        // MIGRATE TO USERNAME/PASSWORD
-        return activityResultLauncher.launch(Intent(activity, HomeScreen::class.java))
         if (loggingIn) return
         if (auth.currentUser != null) return logIn()
         launchCredentialManager()
@@ -60,6 +59,9 @@ class AuthManager(private val activity: MainActivity) {
                 handleSignIn(result.credential)
             } catch (e: NoCredentialException) {
                 Log.e(TAG, "Couldn't find credentials: ${e.localizedMessage}")
+                val intent = Intent(Settings.ACTION_ADD_ACCOUNT)
+                    .putExtra(Settings.EXTRA_ACCOUNT_TYPES, arrayOf("com.google"))
+                activity.startActivity(intent)
             } catch (e: GetCredentialException) {
                 Log.e(TAG, "Couldn't retrieve user's credentials: ${e.localizedMessage}")
             }

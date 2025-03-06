@@ -32,11 +32,6 @@ class MainActivity : AppCompatActivity() {
         testDatabaseFunctions()
     }
 
-    override fun onResume() {
-        super.onResume()
-        // authManager.run()
-    }
-
     private fun testDatabaseFunctions() {
         val dbHelper = DBHelper(this)
         val companyRepo = CompanyRepository(this)
